@@ -146,7 +146,7 @@ export default function GitHubSearch() {
                 {repo.description && (
                   <p className="text-gray-600 mb-2">{repo.description}</p>
                 )}
-                <div className="flex gap-4 text-sm text-gray-600">
+                <div className="flex gap-4 font-semibold text-gray-600">
                   <span title="スター数">
                     ★ {repo.stargazers_count.toLocaleString()}
                   </span>
