@@ -131,7 +131,7 @@ export default function GitHubSearch() {
             results.map((repo) => (
               <article
                 key={repo.id}
-                className="border rounded-lg p-4 hover:shadow-lg transition-shadow bg-white"
+                className="border rounded-lg p-4 hover:shadow-lg transition-shadow bg-blue-200"
               >
                 <div className="mb-2">
                   <a
