@@ -90,7 +90,7 @@ export default function GitHubSearch() {
           <button
             onClick={searchRepositories}
             disabled={loading}
-            className="bg-blue-500 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-600 transition-colors disabled:bg-blue-300"
+            className="bg-green-500 text-white px-6 py-2 rounded flex items-center gap-2 hover:bg-green-600 transition-colors disabled:bg-blue-300"
             aria-label="検索実行"
           >
             <svg
@@ -107,7 +107,7 @@ export default function GitHubSearch() {
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
-            {loading ? "検索中..." : "検索"}
+            {loading ? "検索中..." : "Find"}
           </button>
         </div>
       </div>
