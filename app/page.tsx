@@ -90,7 +90,7 @@ export default function GitHubSearch() {
           <button
             onClick={searchRepositories}
             disabled={loading}
-            className="bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-600 transition-colors disabled:bg-blue-300"
+            className="bg-blue-500 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-600 transition-colors disabled:bg-blue-300"
             aria-label="検索実行"
           >
             <svg
