@@ -83,7 +83,7 @@ export default function GitHubSearch() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="リポジトリを検索..."
+            placeholder="リポジトリを検索中..."
             className="flex-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-label="検索キーワード"
           />
