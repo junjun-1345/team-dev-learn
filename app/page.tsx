@@ -163,7 +163,6 @@ export default function GitHubSearch() {
                   href={{
                     pathname: `./second/${repo.id}`,
                     query: {
-                      info: { ...fetchUserDetails(repo.owner.login) },
                       id: repo.id,
                       login: repo.owner.login,
                     },
