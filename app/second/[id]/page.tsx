@@ -8,7 +8,7 @@ import { GitHubRepo, GitHubUser } from "./github2";
 import {ParsedUrlQuery} from "querystring";
 import { parseAppSegmentConfig } from "next/dist/build/segment-config/app/app-segment-config";
 
-export default function SecondDetail({ params }: { params: { id: string } }) {
+export default function SecondDetail({ params }: { params: { id:string } }) {
  {/* interface QueryParams extends
   ParsedUrlQuery{ id : string}
 
@@ -50,14 +50,14 @@ export default function SecondDetail({ params }: { params: { id: string } }) {
   
   {/*fetchUserDetails(router.query.login);*/}
   useEffect(()=>{
-    
-  },[])
+    fetchUserDetails(params.id);
+  },[]);
 
   return (
     
     <div>
       
-      hello
+      
       {selectedUser && (
         <aside className="sticky top-4">
           <div className="border rounded-lg p-4 bg-white">

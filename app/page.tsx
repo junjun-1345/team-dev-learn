@@ -159,14 +159,13 @@ export default function GitHubSearch() {
                     🔄 {repo.forks_count.toLocaleString()}
                   </span>
                 </div>
-                <Link
-                  href={{
-                    pathname: `./second/${repo.id}`,
-                    query: {
-                      id: repo.id,
-                      login: repo.owner.login,
-                    },
-                  }}
+                {/*queryじゃなくてparamsじゃないのか */}
+                <Link   
+                  href={
+                    `./second/${repo.owner.login}`                  
+
+          
+                  }
                   //onClick={() => fetchUserDetails(repo.owner.login)}
                   className="mt-2 text-blue-500 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2"
                 >
@@ -183,7 +182,7 @@ export default function GitHubSearch() {
           )}
         </section>
 
-        {selectedUser && (
+        {/*{selectedUser && (
           <aside className="sticky top-4">
             <div className="border rounded-lg p-4 bg-white">
               <h2 className="text-xl font-bold mb-4">制作者プロフィール</h2>
@@ -227,7 +226,7 @@ export default function GitHubSearch() {
               </a>
             </div>
           </aside>
-        )}
+        )}*/}
       </div>
     </main>
   );
