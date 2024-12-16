@@ -4,6 +4,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { GitHubRepo, GitHubUser } from "./types/github";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function GitHubSearch() {
   const [query, setQuery] = useState<string>("");
@@ -157,12 +159,18 @@ export default function GitHubSearch() {
                     🔄 {repo.forks_count.toLocaleString()}
                   </span>
                 </div>
-                <button
-                  onClick={() => fetchUserDetails(repo.owner.login)}
+                {/*queryじゃなくてparamsじゃないのか */}
+                <Link   
+                  href={
+                    `./second/${repo.owner.login}/`                  
+
+          
+                  }
+                  //onClick={() => fetchUserDetails(repo.owner.login)}
                   className="mt-2 text-blue-500 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2"
                 >
                   制作者の詳細を表示
-                </button>
+                </Link>
               </article>
             ))
           ) : (
@@ -174,7 +182,7 @@ export default function GitHubSearch() {
           )}
         </section>
 
-        {selectedUser && (
+        {/*{selectedUser && (
           <aside className="sticky top-4">
             <div className="border rounded-lg p-4 bg-white">
               <h2 className="text-xl font-bold mb-4">制作者プロフィール</h2>
@@ -218,7 +226,7 @@ export default function GitHubSearch() {
               </a>
             </div>
           </aside>
-        )}
+        )}*/}
       </div>
     </main>
   );
