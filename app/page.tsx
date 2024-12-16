@@ -162,7 +162,7 @@ export default function GitHubSearch() {
                 {/*queryじゃなくてparamsじゃないのか */}
                 <Link   
                   href={
-                    `./second/${repo.owner.login}`                  
+                    `./second/${repo.owner.login}/`                  
 
           
                   }

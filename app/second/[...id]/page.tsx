@@ -8,7 +8,7 @@ import { GitHubRepo, GitHubUser } from "./github2";
 import {ParsedUrlQuery} from "querystring";
 import { parseAppSegmentConfig } from "next/dist/build/segment-config/app/app-segment-config";
 
-export default function SecondDetail({ params }: { params: { id:string } }) {
+export default function SecondDetail({ params }: { params:{id: any }},) {
  {/* interface QueryParams extends
   ParsedUrlQuery{ id : string}
 
@@ -50,12 +50,67 @@ export default function SecondDetail({ params }: { params: { id:string } }) {
   
   {/*fetchUserDetails(router.query.login);*/}
   useEffect(()=>{
-    fetchUserDetails(params.id);
+    fetchUserDetails(result4.owner.login);
   },[]);
+
+  const result4={owner : {login : params.id.login}};
+
+  const result2 =[
+    
+    {key : params.id.id,
+     href : params.id.html_url,
+     name : params.id.full_name, 
+     description : params.id.description, 
+     stargazers : params.id.stargazers_count, 
+     watchers : params.id.watchers_count, 
+     forks : params.id.forks_count,
+    owner : {login : params.id.login
+             
+    }
+      
+}];
 
   return (
     
     <div>
+      <div>
+      {result2.map((result3) => (
+              <article
+                key={result3.key}
+                className="border rounded-lg p-4 hover:shadow-lg transition-shadow bg-blue-200"
+              >
+                <div className="mb-2">
+                  <a
+                    href={result3.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-lg font-bold text-blue-500 hover:underline"
+                  >
+                    {result3.name}
+                  </a>
+                </div>
+                {result3.description && (
+                  <p className="text-gray-600 mb-2">{result3.description}</p>
+                )}
+                <div className="flex gap-4 font-semibold text-gray-600">
+                  <span title="スター数">
+                    ★ {result3.stargazers.toLocaleString()}
+                  </span>
+                  <span title="ウォッチャー数">
+                    👀 {result3.watchers.toLocaleString()}
+                  </span>
+                  <span title="フォーク数">
+                    🔄 {result3.forks.toLocaleString()}
+                  </span>
+                </div>
+                {/*queryじゃなくてparamsじゃないのか */}
+               {/* <Link   
+                  href={
+                    `./second/${repo.owner.login}/`  */}                
+                    
+              </article>
+ ) )}
+          </div>
       
       
       {selectedUser && (
