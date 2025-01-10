@@ -15,14 +15,15 @@ export interface GitHubRepo {
 
 export interface GitHubUser {
   login: string;
-  name: string | null;
   avatar_url: string;
-  bio: string | null;
-  location: string | null;
+  name: string;
+  bio: string;
+  public_repos: number;
   followers: number;
   following: number;
-  public_repos: number;
-  html_url: string;
+  created_at: string;
+  blog?: string;
+  location?: string;
 }
 
 export interface SearchResponse {
