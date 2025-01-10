@@ -63,7 +63,7 @@ export default function UserDetail() {
   return (
     <main className="p-4 max-w-6xl mx-auto">
       <Link
-        href="/github-search"
+        href="/"
         className="inline-block mb-6 text-blue-500 hover:underline"
       >
         ← 検索結果に戻る
