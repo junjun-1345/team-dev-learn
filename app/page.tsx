@@ -135,7 +135,7 @@ export default function GitHubSearch() {
                 </div>
                 {/*queryじゃなくてparamsじゃないのか */}
                 <Link
-                  href={`./second/${repo.owner.login}/`}
+                  href={`./user_datil/${repo.owner.login}/`}
                   className="mt-2 text-blue-500 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2"
                 >
                   制作者の詳細を表示
