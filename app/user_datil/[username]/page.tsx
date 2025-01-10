@@ -1,4 +1,3 @@
-// app/github-search/[username]/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -17,7 +16,6 @@ export default function UserDetail() {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      console.log("Fetching user data for:", username);
       try {
         const response = await fetch(
           `https://api.github.com/users/${username}`,
@@ -63,68 +61,59 @@ export default function UserDetail() {
   }
 
   return (
-    <main className="p-4 max-w-4xl mx-auto">
+    <main className="p-4 max-w-6xl mx-auto">
       <Link
-        href="/"
+        href="/github-search"
         className="inline-block mb-6 text-blue-500 hover:underline"
       >
         ← 検索結果に戻る
       </Link>
 
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <div className="flex items-start gap-6">
-          <Image
-            src={user.avatar_url}
-            alt={`${user.login}のアバター`}
-            className="w-32 h-32 rounded-full"
-            width={128}
-            height={128}
-          />
-
-          <div>
-            <h1 className="text-2xl font-bold mb-2">
-              {user.name || user.login}
-            </h1>
-            {user.bio && <p className="text-gray-600 mb-4">{user.bio}</p>}
-
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <h2 className="font-semibold">場所</h2>
-                <p>{user.location || "未設定"}</p>
-              </div>
-              <div>
-                <h2 className="font-semibold">Webサイト</h2>
-                {user.blog ? (
-                  <a
-                    href={user.blog}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
-                  >
-                    {user.blog}
-                  </a>
-                ) : (
-                  "未設定"
-                )}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-3 gap-4 text-center">
-              <div className="bg-gray-50 p-3 rounded">
-                <div className="font-bold">{user.public_repos}</div>
-                <div className="text-sm text-gray-600">リポジトリ</div>
-              </div>
-              <div className="bg-gray-50 p-3 rounded">
-                <div className="font-bold">{user.followers}</div>
-                <div className="text-sm text-gray-600">フォロワー</div>
-              </div>
-              <div className="bg-gray-50 p-3 rounded">
-                <div className="font-bold">{user.following}</div>
-                <div className="text-sm text-gray-600">フォロー中</div>
-              </div>
-            </div>
-          </div>
+      <div className="flex gap-6">
+        <div className="flex-1">
+          <h2 className="text-2xl font-bold mb-4">ユーザー詳細</h2>
         </div>
+
+        <aside className="sticky top-4 w-80">
+          <div className="border rounded-lg p-4 bg-white">
+            <h2 className="text-xl font-bold mb-4">制作者プロフィール</h2>
+            <div className="flex items-center gap-4 mb-4">
+              <Image
+                src={user.avatar_url}
+                alt={`${user.login}のアバター`}
+                className="w-16 h-16 rounded-full"
+                width={64}
+                height={64}
+              />
+              <div>
+                <h3 className="font-bold">{user.name || user.login}</h3>
+                <p className="text-gray-600">@{user.login}</p>
+              </div>
+            </div>
+
+            {user.bio && <p className="mb-2 text-gray-700">{user.bio}</p>}
+
+            <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
+              <div>
+                <p>フォロワー: {user.followers.toLocaleString()}</p>
+                <p>フォロー中: {user.following.toLocaleString()}</p>
+              </div>
+              <div>
+                <p>公開リポジトリ: {user.public_repos.toLocaleString()}</p>
+                <p>場所: {user.location || "未設定"}</p>
+              </div>
+            </div>
+
+            <a
+              href={user.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-4 text-blue-500 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2"
+            >
+              GitHubプロフィールを表示
+            </a>
+          </div>
+        </aside>
       </div>
     </main>
   );
