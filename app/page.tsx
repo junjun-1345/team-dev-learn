@@ -3,7 +3,7 @@
 
 import React, { useState } from "react";
 import { GitHubRepo } from "./types/github";
-import Link from "next/link";
+import RepositoryCard from "./components/repositoryCard";
 
 export default function GitHubSearch() {
   const [query, setQuery] = useState<string>("");
@@ -105,42 +105,7 @@ export default function GitHubSearch() {
             </div>
           ) : results.length > 0 ? (
             results.map((repo) => (
-              <article
-                key={repo.id}
-                className="border rounded-lg p-4 hover:shadow-lg transition-shadow bg-blue-200"
-              >
-                <div className="mb-2">
-                  <a
-                    href={repo.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-lg font-bold text-blue-500 hover:underline"
-                  >
-                    {repo.full_name}
-                  </a>
-                </div>
-                {repo.description && (
-                  <p className="text-gray-600 mb-2">{repo.description}</p>
-                )}
-                <div className="flex gap-4 font-semibold text-gray-600">
-                  <span title="スター数">
-                    ★ {repo.stargazers_count.toLocaleString()}
-                  </span>
-                  <span title="ウォッチャー数">
-                    👀 {repo.watchers_count.toLocaleString()}
-                  </span>
-                  <span title="フォーク数">
-                    🔄 {repo.forks_count.toLocaleString()}
-                  </span>
-                </div>
-                {/*queryじゃなくてparamsじゃないのか */}
-                <Link
-                  href={`./user_datil/${repo.owner.login}/`}
-                  className="mt-2 text-blue-500 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2"
-                >
-                  制作者の詳細を表示
-                </Link>
-              </article>
+              <RepositoryCard key={repo.id} repository={repo} />
             ))
           ) : (
             query !== "" && (
