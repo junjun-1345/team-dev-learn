@@ -4,34 +4,48 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { GitHubUser } from "@/app/types/github";
+import { GitHubRepo, GitHubUser } from "@/app/types/github";
+import RepositoryCard from "@/app/components/repositoryCard";
 
 export default function UserDetail() {
   const params = useParams();
   const username = params.username as string;
 
   const [user, setUser] = useState<GitHubUser | null>(null);
+  const [repositories, setRepositories] = useState<GitHubRepo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(
-          `https://api.github.com/users/${username}`,
-          {
+        const [userResponse, reposResponse] = await Promise.all([
+          fetch(`https://api.github.com/users/${username}`, {
             headers: {
               Accept: "application/vnd.github.v3+json",
             },
-          }
-        );
+          }),
+          fetch(
+            `https://api.github.com/users/${username}/repos?sort=updated&per_page=10`,
+            {
+              headers: {
+                Accept: "application/vnd.github.v3+json",
+              },
+            }
+          ),
+        ]);
 
-        if (!response.ok) {
-          throw new Error(`GitHub API error: ${response.status}`);
+        if (!userResponse.ok || !reposResponse.ok) {
+          throw new Error(`GitHub API error: ${userResponse.status}`);
         }
 
-        const userData = await response.json();
+        const [userData, reposData] = await Promise.all([
+          userResponse.json(),
+          reposResponse.json(),
+        ]);
+
         setUser(userData);
+        setRepositories(reposData);
       } catch (err) {
         setError(
           err instanceof Error
@@ -71,7 +85,12 @@ export default function UserDetail() {
 
       <div className="flex gap-6">
         <div className="flex-1">
-          <h2 className="text-2xl font-bold mb-4">ユーザー詳細</h2>
+          <h2 className="text-2xl font-bold mb-4">最近更新されたリポジトリ</h2>
+          <div className="space-y-4">
+            {repositories.map((repo) => (
+              <RepositoryCard key={repo.id} repository={repo} />
+            ))}
+          </div>
         </div>
 
         <aside className="sticky top-4 w-80">
